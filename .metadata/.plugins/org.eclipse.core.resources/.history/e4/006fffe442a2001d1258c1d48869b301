@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframwork.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					http://www.springframework.org/schema/beans/spring-beans.xsd
+					http://www.springframework.org/schema/context
+					https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!--Exam exam = new NewlecExam();-->
+	<context:annotation-config/> <!--객체를 생성한뒤에 그 객체 안에 autowired된 것이 있는지 확인해봐-->
+	
+	<!--<bean id="exam1" class="spring.di.entity.NewlecExam">
+		<constructor-arg name="kor" value ="20"/>
+		<constructor-arg index = "2" value ="20"/>
+		<constructor-arg index = "1" value ="30"/>
+		<constructor-arg index = "3" value ="40"/>
+	</bean>
+	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="50" p:eng="100"/>-->
+	
+	
+	
+	
+	<!--ExamConsole console = new GridExamConsole();-->
+	<!--<bean id="console" class="spring.di.ui.GridExamConsole">-->
+	<bean id="console" class="spring.di.ui.InlineExamConsole"/>
+		<!--console.setExam(exam);-->
+		<!-- 1.DI -->
+		<!-- <property name="exam" ref="exam"></property>--> 
+													<!--name의 setExam -> Exam(set제거) -> exam(E대문자->e소문자)-->
+													<!-- setExam메서드에 위에 있는 exam을 주입한다-->
+		
+
+	
+	
+	<bean id="exams" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="spring.di.entity.NewlecExam" p:kor="10" p:eng="20"></bean>
+				<ref bean = "exam1"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

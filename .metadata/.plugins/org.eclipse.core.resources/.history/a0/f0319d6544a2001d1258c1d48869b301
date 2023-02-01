@@ -1,0 +1,46 @@
+package spring.di.ui;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import spring.di.entity.Exam;
+
+@Component
+public class InlineExamConsole implements ExamConsole {
+	@Autowired(required=false) // 해당 객체가 만들어지면, Autowired된 객체를 연결해주라는 말
+	@Qualifier("exam2")
+	private Exam exam;
+	
+	public InlineExamConsole() {
+		// TODO Auto-generated constructor stub
+		System.out.println("constructor");
+	}
+	
+	
+	public InlineExamConsole(Exam exam) {
+		
+		System.out.println("overloaded constructor");
+		this.exam = exam;
+	}
+
+
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		if(exam==null)
+			System.out.printf("total is %d, avg is %f\n",0, 0.0f);
+		else
+			System.out.printf("total is %d, avg is %f\n",exam.total(), exam.avg());
+
+	}
+	
+	@Override
+	public void setExam(Exam exam) {
+		// TODO Auto-generated method stub
+		System.out.println("setter");
+		this.exam = exam;
+	}
+
+}
